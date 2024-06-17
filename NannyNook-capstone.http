@@ -1,0 +1,6 @@
+@NannyNook_capstone_HostAddress = http://localhost:5265
+
+GET {{NannyNook_capstone_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
