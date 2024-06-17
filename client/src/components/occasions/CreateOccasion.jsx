@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker"
+import 'react-datepicker/dist/react-datepicker.css';
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { getAllCategories } from "../../managers/categoryManager.js";
 import { useNavigate } from "react-router-dom";
-import { createPost } from "../../managers/postManager.js";
+import { createOccasion } from "../../managers/occasionManager.js";
 
 const CreateOccasion = ({ loggedInUser }) => {
   const [title, setTitle] = useState("");
@@ -14,6 +15,7 @@ const CreateOccasion = ({ loggedInUser }) => {
   const [eventDate, setEventDate] = useState(null)
   const [category, setCategory] = useState(0);
   const [categories, setCategories] = useState([]);
+  const [occasionImage, setOccasionImage] = useState(null)
 
   const navigate = useNavigate();
 
@@ -22,21 +24,22 @@ const CreateOccasion = ({ loggedInUser }) => {
 
     e.preventDefault();
     const newOccasion = {
-    Title: title,
-    Description: description,
-    City: city,
-    State: state,
-    Location: eventLocation,
-    Date: eventDate,
-    CategoryId: category,
-    HostUserProfileId: loggedInUser.id
+      Title: title,
+      Description: description,
+      City: city,
+      State: state,
+      Location: eventLocation,
+      Date: eventDate,
+      CategoryId: category,
+      HostUserProfileId: loggedInUser.id,
+      OccasionImage: occasionImage
     };
-
+    
     console.log("Creating new occasion with payload:", newOccasion);
 
     try {
-      const createdOccasion = await createPost(newOccasion);
-      navigate(`/posts/${createdOccasion.id}`)
+      const createdOccasion = await createOccasion(newOccasion);
+      navigate(`/events/${createdOccasion.id}`)
     }
     catch (error) {
       console.error("Error creating this event:" , error)
@@ -102,12 +105,26 @@ const CreateOccasion = ({ loggedInUser }) => {
           />
         </FormGroup>
         <FormGroup>
+          <Label>Event Image URL</Label>
+          <Input
+            type="text"
+            value={occasionImage}
+            onChange={(e) => {
+              setOccasionImage(e.target.value);
+            }}
+          />
+        </FormGroup>
+        <FormGroup>
           <Label>Date</Label>
           <div>
             <DatePicker
-              showTimeSelect
               selected={eventDate}
-              onChange={(eventDate) => setEventDate(eventDate)}
+              onChange={(date) => setEventDate(date)}
+              showTimeSelect
+              timeFormat="hh:mm aa"
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="MMMM d, yyyy h:mm aa"
             />
           </div>
         </FormGroup>
@@ -122,7 +139,7 @@ const CreateOccasion = ({ loggedInUser }) => {
           >
             <option value={0}>Choose a Category</option>
             {categories.map((c) => (
-              <option key={c.id} value={c.id}>{`${c.categoryName}`}</option>
+              <option key={c.id} value={c.id}>{`${c.name}`}</option>
             ))}
           </Input>
         </FormGroup>

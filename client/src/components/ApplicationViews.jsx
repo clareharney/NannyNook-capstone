@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import CreateOccasion from "./occasions/CreateOccasion.jsx";
 import { MyProfile } from "./profile/MyProfile.jsx";
+import OccasionDetails from "./occasions/OccasionDetails.jsx";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -26,10 +27,10 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <Route path=":id">
             <Route
               index
-              element={<p>Occasion Details will go here</p>}
+              element={<OccasionDetails loggedInUser={loggedInUser} />}
             />
           </Route>
-          
+
         </Route>
         <Route
           path="myprofile"

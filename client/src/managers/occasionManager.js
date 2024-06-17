@@ -1,4 +1,4 @@
-const _apiUrl = "/api/occasion";
+const _apiUrl = "/api/Occasion";
 
 export const getOccasions = (search, categoryId, pending) => {
   let url = _apiUrl;
@@ -19,38 +19,22 @@ export const getOccasionById = (id) => {
   return fetch(_apiUrl + `/${id}`).then((res) => res.json());
 };
 
-export const createOccasion = async (occasion) => {
-  try {
-    const response = await fetch(_apiUrl, {
+export const createOccasion = (occasion) => {
+    return fetch(_apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(occasion),
-    });
-    if (!response.ok) {
-      console.error(
-        "Server response status:",
-        response.status,
-        response.statusText
-      );
-      try {
-        const errorData = await response.json();
-        console.error("Server response JSON:", errorData);
-      } catch (jsonError) {
-        console.error(
-          "Server response could not be parsed as JSON:",
-          jsonError
-        );
-      }
-      throw new Error("Failed to create this occasion");
-    }
+      body: JSON.stringify(occasion)
+    }).then((res) => res.json())
+    // if (!response.ok) {
+    //     const errorData = await response.json();
+    //     console.error("Server response status:", response.status);
+    //     console.error("Server response JSON:", errorData);
+    //     throw new Error("Failed to create this occasion");
+    // }
 
-    return await response.json();
-  } catch (error) {
-    console.error("Error creating this occasion:", error);
-    throw error;
-  }
+    // return response.json();
 };
 
 export const deleteOccasion = (occasionId) => {
