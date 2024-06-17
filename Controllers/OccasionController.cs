@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NannyNook.Models;
+using NannyNook.Models.DTOs;
 using NannyNookcapstone.Data;
 
 namespace NannyNook.Controllers;
@@ -17,28 +18,49 @@ public class OccasionController : ControllerBase
     }
 
     [HttpPost]
-
-    public IActionResult CreateOccasion([FromBody] Occasion occasion)
+public IActionResult CreateOccasion(Occasion newOccasionDto)
+{
+    try
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
 
-        if (!_dbContext.Categories.Any(c => c.Id == occasion.CategoryId))
+        var newOccasion = new Occasion
         {
-            return BadRequest("Invalid CategoryId. Category does not exist.");
-        }
+            Title = newOccasionDto.Title,
+            Description = newOccasionDto.Description,
+            City = newOccasionDto.City,
+            State = newOccasionDto.State,
+            Location = newOccasionDto.Location,
+            Date = newOccasionDto.Date,
+            CategoryId = newOccasionDto.CategoryId,
+            OccasionImage = newOccasionDto.OccasionImage,
+            HostUserProfileId = newOccasionDto.HostUserProfileId
+        };
 
-        if (!_dbContext.UserProfiles.Any(u => u.Id == occasion.HostUserProfileId))
-        {
-            return BadRequest("Invalid UserProfileId. User profile does not exist.");
-        }
-
-        _dbContext.Occasions.Add(occasion);
+        _dbContext.Occasions.Add(newOccasion);
         _dbContext.SaveChanges();
 
-        return Ok();
+        return Ok(newOccasion);
     }
+    catch (Exception ex)
+    {
+        return StatusCode(500, $"Internal server error: {ex.Message}");
+    }
+}
+
+
+    [HttpGet("{id}")]
+        public IActionResult GetOccasion(int id)
+        {
+            var occasion = _dbContext.Occasions
+                .FirstOrDefault(o => o.Id == id);
+
+            if (occasion == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(occasion);
+        }
+
 
 }

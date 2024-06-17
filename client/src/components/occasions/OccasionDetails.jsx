@@ -46,9 +46,9 @@ const OccasionDetails = ({loggedInUser}) => {
         return new Intl.DateTimeFormat("en-US", options).format(date);
       };
       
-  const handleDeletePost = async (postId) => {
+  const handleDeleteOccasion = async (occasionId) => {
     try {
-      await deletePost(postId).then(() => {
+      await deleteOccasion(occasionId).then(() => {
         navigate("/myposts");
       });
     } catch (error) {
@@ -57,7 +57,7 @@ const OccasionDetails = ({loggedInUser}) => {
   };
 
   const handleConfirmDelete = () => {
-    handleDeletePost(postToDelete);
+    handleDeletePost(occasionToDelete);
     setShowConfirmation(false);
   };
 
@@ -67,12 +67,130 @@ const OccasionDetails = ({loggedInUser}) => {
 
   const handleRSVP = async () => {
     const RSVP = {
-      hostUserProfileId: occasion?.hostUserProfile?.id,
-      followerId: loggedInUser.id,
+        hostUserProfileId: occasion?.hostUserProfile?.id,
+        userProfileId: loggedInUser.id,
     };
-    await NewSubscription(subscription);
+    await NewRSVP(RSVP);
     refresh();
   };
 
-}
+  const handleUnRSVP = async () => {
+    const RSVP = {
+        hostUserProfileId: occasion?.hostUserProfile?.id,
+        userProfileId: loggedInUser.id,
+    };
+    await UnRSVP(RSVP);
+    refresh();
+  };
+
+  useEffect(() => {
+    getRSVPs().then(setRsvps);
+  }, [occasion]);
+
+  useEffect(() => {
+    const userRSVPs = occasion.userProfile?.rsvps.filter(
+      (r) => r.userProfileId == loggedInUser.id && r.endDate == null
+    );
+
+    if (userRSVPs?.length == 0) {
+      setUserRSVPs(false);
+    } else {
+      setUserRSVPs(true);
+    }
+  }, [occasion, userRSVPs, rsvps]);
+
+  return (
+    <>
+      <Card
+        key={id}
+        style={{
+          width: "25rem",
+        }}
+      >
+        <img alt="Sample" src={occasion.occasionImage} />
+        <CardBody>
+          <CardTitle tag="h5">{occasion.title}</CardTitle>
+          <CardSubtitle className="mb-2 text-muted" tag="h6">
+            <Link
+              to={
+                occasion.hostUserProfileId != loggedInUser.id
+                  ? `/occasions/${occasion.hostUserProfile?.id}/${occasion.hostUserProfile?.identityUser?.userName}`
+                  : null
+              }
+            >
+              {occasion.hostUserProfile?.identityUser?.userName}
+            </Link>
+          </CardSubtitle>
+          <CardText>{occasion.description}</CardText>
+          <CardText>{formatDate(occasion.date)}</CardText>
+          <CardText>{formatDate(occasion.location)}</CardText>
+          {occasion?.hostUserProfile?.id == loggedInUser.id ? (
+            <>
+              <div className="post-btns">
+                <Button onClick={() => navigate(`/myevents/edit/${occasion.id}`)}>
+                  Edit Event
+                </Button>
+                <Button
+                  onClick={() => {
+                    setOccasionToDelete(occasion.id);
+                    setShowConfirmation(true);
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
+
+              {showConfirmation && (
+                <div className="confirmation-modal">
+                  <p>Are you sure you want to delete this event?</p>
+                  <button onClick={handleConfirmDelete}>Delete</button>
+                  <button onClick={handleCancelDelete}>Cancel</button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div>
+              {userRsvps == false ? (
+                <Button
+                  className="post-btns"
+                  onClick={() => {
+                    handleRSVP().then(() => {
+                      refresh();
+                    });
+                  }}
+                >
+                  RSVP
+                </Button>
+              ) : (
+                <Button
+                  className="post-btns"
+                  onClick={() => {
+                    handleUnRSVP().then(() => {
+                      refresh();
+                    });
+                  }}
+                >
+                  Un-RSVP
+                </Button>
+              )}
+            </div>
+          )}
+        </CardBody>
+      </Card>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalFooter>
+          <Button
+            color="primary"
+            onClick={() => handleSubmit(id, tagSelections)}
+          >
+            Save
+          </Button>{" "}
+          <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </>
+  );
+};
 export default OccasionDetails

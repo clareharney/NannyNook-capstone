@@ -12,7 +12,7 @@ export default function Login({ setLoggedInUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password).then((user) => {
-      if (!user || !user.isActive) {
+      if (!user) {
         setFailedLogin(true);
       } else {
         setLoggedInUser(user);
