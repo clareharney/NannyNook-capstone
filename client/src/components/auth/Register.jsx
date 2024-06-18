@@ -8,7 +8,7 @@ export default function Register({ setLoggedInUser }) {
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [imageLocation, setImageLocation] = useState("");
+  const [location, setLocation] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -29,7 +29,7 @@ export default function Register({ setLoggedInUser }) {
         userName,
         email,
         password,
-        imageLocation: imageLocation || null,
+        location
       };
       register(newUser).then((user) => {
         if (user.errors) {
@@ -86,12 +86,12 @@ export default function Register({ setLoggedInUser }) {
         />
       </FormGroup>
       <FormGroup>
-        <Label>Image URL</Label>
+        <Label>Location</Label>
         <Input
           type="text"
-          value={imageLocation}
+          value={location}
           onChange={(e) => {
-            setImageLocation(e.target.value);
+            setLocation(e.target.value);
           }}
         />
       </FormGroup>

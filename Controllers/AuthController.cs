@@ -139,6 +139,7 @@ public class AuthController : ControllerBase
                 LastName = registration.LastName,
                 Location = registration.Location,
                 IdentityUserId = user.Id,
+                ProfileImage = ""
             });
             _dbContext.SaveChanges();
 
@@ -157,6 +158,6 @@ public class AuthController : ControllerBase
 
             return Ok();
         }
-        return StatusCode(500);
+        return BadRequest(new { Errors = result.Errors.Select(ir => ir.Description) });
     }
 }

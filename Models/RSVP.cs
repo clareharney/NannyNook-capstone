@@ -5,11 +5,6 @@ namespace NannyNook.Models;
 
 public class RSVP
     {
-        [Key]
-        public int Id { get; set; }
-        
-        [Required]
-        public int HostUserProfileId { get; set; }
 
         [Required]
         public int UserProfileId { get; set; }

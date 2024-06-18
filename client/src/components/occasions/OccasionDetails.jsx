@@ -49,7 +49,7 @@ const OccasionDetails = ({loggedInUser}) => {
   const handleDeleteOccasion = async (occasionId) => {
     try {
       await deleteOccasion(occasionId).then(() => {
-        navigate("/myposts");
+        navigate("/myevents");
       });
     } catch (error) {
       console.error("Error deleting this post:", error);

@@ -14,18 +14,26 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
     <Routes>
       <Route path="/" element={
         <AuthorizedRoute loggedInUser={loggedInUser}>
-          <HomePage />
+          <HomePage loggedInUser={loggedInUser} />
         </AuthorizedRoute>
       } />
       
       <Route path="events">
-        <Route index element={<p>Where All Occasions in user's area will be located</p>} />
-        <Route path="create" element={<CreateOccasion loggedInUser={loggedInUser} />} />
-        <Route path=":id" element={<OccasionDetails loggedInUser={loggedInUser} />} />
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <p>Placeholder</p>
+        </AuthorizedRoute>} />
+        <Route path="create" element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <CreateOccasion loggedInUser={loggedInUser} />
+        </AuthorizedRoute>} />
+        <Route path=":id" element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <OccasionDetails loggedInUser={loggedInUser} />
+        </AuthorizedRoute>} />
       </Route>
 
       <Route path="myevents">
-        <Route index element={ <MyOccasionsList loggedInUser={loggedInUser}/> } />
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <MyOccasionsList loggedInUser={loggedInUser}/>
+        </AuthorizedRoute>} />
         <Route path="edit/:occasionId" element={
           <AuthorizedRoute loggedInUser={loggedInUser}>
             <EditOccasion loggedInUser={loggedInUser} />
