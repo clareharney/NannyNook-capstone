@@ -19,5 +19,11 @@ public class RSVPController : ControllerBase
     {
         _dbContext = context;
     }
-    
+
+    [HttpGet]
+    public IActionResult GetRSVPs()
+    {
+        return Ok(_dbContext.RSVPs.ToList());
+    }
+
 }

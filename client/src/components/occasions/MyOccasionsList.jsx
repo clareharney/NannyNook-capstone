@@ -12,7 +12,7 @@ const MyOccasionsList = ({ loggedInUser}) => {
           try {
             const occasionsData = await getOccasions();
             const userOccasions = occasionsData
-              .filter((occasion) => occasion.userProfileId === loggedInUser.id)
+              .filter((occasion) => occasion.hostUserProfileId === loggedInUser.id)
             setOccasions(userOccasions);
           } catch (error) {
             console.error("Error fetching:", error);
@@ -35,15 +35,15 @@ const MyOccasionsList = ({ loggedInUser}) => {
                         <CardBody>
                             <CardTitle tag="h5">{o.title}</CardTitle>
                             <CardSubtitle className="mb-2 text-muted" tag="h6">
-                                {o.userProfile.name}
+                                {o.hostUserProfile.fullName}
                             </CardSubtitle>
                             <CardText>{o.category?.name}</CardText>
                             <CardText>{o.location}</CardText>
-                            <CardText>{o.date}</CardText>
+                            <CardText>{o.formattedDate}</CardText>
                             <CardBody>{o.description}</CardBody>
                             <Button
                                 onClick={() => {
-                                    navigate(`/posts/${o.id}`);
+                                    navigate(`/events/${o.id}`);
                                 }}
                             >
                                 View Occasion

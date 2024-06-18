@@ -120,7 +120,8 @@ export default function Register({ setLoggedInUser }) {
         />
         <FormFeedback>Passwords do not match!</FormFeedback>
       </FormGroup>
-      {errors.map((e, i) => (
+
+      {Array.isArray(errors) && errors.map((e, i) => (
         <p key={i} style={{ color: "red" }}>
           {e}
         </p>

@@ -42,4 +42,8 @@ public class Occasion
         public Category? Category { get; set; }
 
         public List<RSVP>? RSVPs { get; set; }
+
+        //calculated properties
+
+        public string FormattedDate => Date.ToString("MMMM dd, yyyy, hh:mm");
     }
