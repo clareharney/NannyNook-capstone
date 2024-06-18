@@ -40,7 +40,7 @@ public IActionResult CreateOccasion([FromBody] Occasion newOccasionDto)
         _dbContext.Occasions.Add(newOccasion);
         _dbContext.SaveChanges();
 
-        return CreatedAtAction(nameof(GetOccasion), new { id = newOccasion.Id }, newOccasion);
+        return CreatedAtAction(nameof(GetOccasionById), new { id = newOccasion.Id }, newOccasion);
     }
     catch (Exception ex)
     {
@@ -50,18 +50,39 @@ public IActionResult CreateOccasion([FromBody] Occasion newOccasionDto)
 
 
     [HttpGet("{id}")]
-        public IActionResult GetOccasion(int id)
+
+    public IActionResult GetOccasionById(int id)
+    {
+        var occasions = _dbContext.Occasions
+        .Include(o => o.HostUserProfile)
+        .Include(o => o.Category)
+        .Include(o => o.RSVPs)
+        .Select(o => new OccasionDTO
         {
-            var occasion = _dbContext.Occasions
-                .FirstOrDefault(o => o.Id == id);
-
-            if (occasion == null)
+            Id = o.Id,
+            Title = o.Title,
+            Description = o.Description,
+            State = o.State,
+            City = o.City,
+            Location = o.Location,
+            CategoryId = o.CategoryId,
+            Date = o.Date,
+            OccasionImage = o.OccasionImage,
+            HostUserProfileId = o.HostUserProfileId,
+            RSVPs = o.RSVPs.Select(r => new RSVPDTO 
             {
-                return NotFound();
-            }
-
-            return Ok(occasion);
+                UserProfileId = r.UserProfileId,
+                OccasionId = r.OccasionId
+            }).ToList()
         }
+        ).SingleOrDefault(o => o.Id == id);
+
+        return Ok(occasions);
+    }
+
+
+
+
 
 [HttpPut("{id}")]
 
@@ -127,7 +148,6 @@ public IActionResult GetOccasions()
                 o.HostUserProfile.Bio,
                 RSVPs = o.HostUserProfile.RSVPs.Select(r => new 
                 {
-                    r.HostUserProfileId,
                     r.UserProfileId,
                     r.OccasionId
                 }).ToList()
@@ -155,7 +175,6 @@ public IActionResult GetOccasions()
                 Bio = x.HostUserProfile.Bio,
                 RSVPs = x.HostUserProfile.RSVPs.Select(r => new RSVPDTO
                 {
-                    HostUserProfileId = r.HostUserProfileId,
                     UserProfileId = r.UserProfileId,
                     OccasionId = r.OccasionId
                 }).ToList()
@@ -170,5 +189,92 @@ public IActionResult GetOccasions()
     return Ok(occasions);
 }
 
+[HttpGet("{id}/user")]
+public IActionResult GetOccasionsByUserId(int id)
+{
+    var occasions = _dbContext.Occasions
+        .Include(o => o.HostUserProfile)
+        .Include(o => o.Category)
+        .Select(o => new
+        {
+            Occasion = o,
+            Category = new 
+            {
+                o.Category.Id,
+                o.Category.Name
+            },
+            HostUserProfile = new 
+            {
+                o.HostUserProfile.Id,
+                o.HostUserProfile.FirstName,
+                o.HostUserProfile.LastName,
+                o.HostUserProfile.Bio,
+                RSVPs = o.HostUserProfile.RSVPs.Select(r => new 
+                {
+                    r.UserProfileId,
+                    r.OccasionId
+                }).ToList()
+            }
+        })
+        .AsEnumerable() // Bring data into memory for client-side evaluation
+        .Select(x => new OccasionDTO
+        {
+            Id = x.Occasion.Id,
+            Title = x.Occasion.Title,
+            OccasionImage = x.Occasion.OccasionImage,
+            Description = x.Occasion.Description,
+            CategoryId = x.Occasion.CategoryId,
+            Category = new CategoryDTO
+            {
+                Id = x.Category.Id,
+                Name = x.Category.Name
+            },
+            HostUserProfileId = x.HostUserProfile.Id,
+            HostUserProfile = new UserProfileDTO
+            {
+                Id = x.HostUserProfile.Id,
+                FirstName = x.HostUserProfile.FirstName,
+                LastName = x.HostUserProfile.LastName,
+                Bio = x.HostUserProfile.Bio,
+                RSVPs = x.HostUserProfile.RSVPs.Select(r => new RSVPDTO
+                {
+                    UserProfileId = r.UserProfileId,
+                    OccasionId = r.OccasionId
+                }).ToList()
+            },
+            State = x.Occasion.State,
+            City = x.Occasion.City,
+            Location = x.Occasion.Location,
+            Date = x.Occasion.Date
+        })
+        .Where(o => o.HostUserProfileId != id)
+        .ToList();
+
+    return Ok(occasions);
+}
+
+
+[HttpDelete("{id}")]
+    //[Authorize]
+    public IActionResult DeleteOccasion(int id)
+    {
+        try
+        {
+            var post = _dbContext.Occasions.Find(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.Occasions.Remove(post);
+            _dbContext.SaveChanges();
+
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    }
 
 }

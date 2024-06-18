@@ -46,4 +46,5 @@ public class Occasion
         //calculated properties
 
         public string FormattedDate => Date.ToString("MMMM dd, yyyy, hh:mm");
-    }
+        
+}

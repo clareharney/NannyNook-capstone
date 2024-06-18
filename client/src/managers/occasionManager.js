@@ -9,6 +9,10 @@ export const getOccasionById = (id) => {
   return fetch(_apiUrl + `/${id}`).then((res) => res.json());
 };
 
+export const getOccasionByNotUserId = (id) => {
+  return fetch(_apiUrl + `/${id}/user`).then((res) => res.json());
+};
+
 export const createOccasion = (occasion) => {
     return fetch(_apiUrl, {
       method: "POST",

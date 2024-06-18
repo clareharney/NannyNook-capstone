@@ -31,7 +31,7 @@ public class UserProfileDTO
     [Required]
     public string Location { get; set; }
 
-    public string ProfileImage { get; set;}
+    public string? ProfileImage { get; set;}
 
     public bool IsNanny { get; set; }
 

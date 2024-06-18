@@ -16,5 +16,7 @@ public class Registration
     public string LastName { get; set; }
     [DataType(DataType.Url)]
     public string ImageLocation { get; set; }
+    [Required]
+    public string Location {get; set;}
 
 }
