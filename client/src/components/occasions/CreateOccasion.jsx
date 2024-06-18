@@ -29,7 +29,7 @@ const CreateOccasion = ({ loggedInUser }) => {
       City: city,
       State: state,
       Location: eventLocation,
-      Date: eventDate,
+      Date: eventDate.toISOString(),
       CategoryId: category,
       HostUserProfileId: loggedInUser.id,
       OccasionImage: occasionImage

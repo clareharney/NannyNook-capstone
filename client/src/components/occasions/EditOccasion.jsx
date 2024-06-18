@@ -2,8 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { editOccasion, getOccasionById } from "../../managers/occasionManager.js";
+import DatePicker from "react-datepicker"
+import 'react-datepicker/dist/react-datepicker.css';
+import { getAllCategories } from "../../managers/categoryManager.js";
 
-const EditOccasion = () => {
+const EditOccasion = ({loggedInUser}) => {
     const {occasionId} = useParams()
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -23,7 +26,7 @@ const EditOccasion = () => {
     }
 
     useEffect(() => {
-        if (postId) {
+        if (occasionId) {
             const fetchOccasion = async () => {
                 try {
                     const occasionData = await getOccasionById(occasionId)
@@ -50,27 +53,29 @@ const EditOccasion = () => {
 
       const handleSave = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("image", selectedFile);
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("state", state);
-        formData.append("city", city);
-        formData.append("eventLocation", eventLocation);
-        formData.append("eventDate", eventDate);
-        formData.append("categoryId", category);
+        const occasionData = {
+            Title: title,
+            Description: description,
+            City: city,
+            State: state,
+            Location: eventLocation,
+            Date: eventDate,
+            CategoryId: category,
+            HostUserProfileId: loggedInUser.id
+            // OccasionImage: occasionImage 
+        }
         
         try {
-          const response = await editOccasion(formData, parseInt(occasionId));
+          const response = await editOccasion(occasionData, parseInt(occasionId));
           console.log('Response:', response);  // Debug logging
-          navigate(`/posts/${occasionId}`)
+          navigate(`/events/${occasionId}`)
         } catch (error) {
           console.error("There was an error uploading the file!", error);
         }
       };
 
       const handleCancel = () => {
-        navigate(`/posts/${postId}`);
+        navigate(`/events/${postId}`);
       };
 
       return (
@@ -131,9 +136,13 @@ const EditOccasion = () => {
               <Label>Date</Label>
               <div>
                 <DatePicker
-                  showTimeSelect
-                  selected={eventDate}
-                  onChange={(eventDate) => setEventDate(eventDate)}
+                    selected={eventDate}
+                    onChange={(date) => setEventDate(date)}
+                    showTimeSelect
+                    timeFormat="hh:mm aa"
+                    timeIntervals={15}
+                    timeCaption="Time"
+                    dateFormat="MMMM d, yyyy h:mm aa"
                 />
               </div>
             </FormGroup>
@@ -148,7 +157,7 @@ const EditOccasion = () => {
               >
                 <option value={0}>Choose a New Category</option>
                 {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{`${c.categoryName}`}</option>
+                  <option key={c.id} value={c.id}>{`${c.name}`}</option>
                 ))}
               </Input>
             </FormGroup>

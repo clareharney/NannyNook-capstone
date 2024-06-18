@@ -57,7 +57,7 @@ const OccasionDetails = ({loggedInUser}) => {
   };
 
   const handleConfirmDelete = () => {
-    handleDeletePost(occasionToDelete);
+    handleDeleteOccasion(occasionToDelete);
     setShowConfirmation(false);
   };
 
@@ -93,11 +93,11 @@ const OccasionDetails = ({loggedInUser}) => {
     );
 
     if (userRSVPs?.length == 0) {
-      setUserRSVPs(false);
+      setUserRsvps(false);
     } else {
-      setUserRSVPs(true);
+      setUserRsvps(true);
     }
-  }, [occasion, userRSVPs, rsvps]);
+  }, [occasion, userRsvps, rsvps]);
 
   return (
     <>
@@ -123,8 +123,8 @@ const OccasionDetails = ({loggedInUser}) => {
           </CardSubtitle>
           <CardText>{occasion.description}</CardText>
           <CardText>{formatDate(occasion.date)}</CardText>
-          <CardText>{formatDate(occasion.location)}</CardText>
-          {occasion?.hostUserProfile?.id == loggedInUser.id ? (
+          <CardText>{occasion.location}</CardText>
+          {occasion?.hostUserProfileId == loggedInUser.id ? (
             <>
               <div className="post-btns">
                 <Button onClick={() => navigate(`/myevents/edit/${occasion.id}`)}>

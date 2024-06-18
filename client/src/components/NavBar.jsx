@@ -29,15 +29,15 @@ return (
             <Collapse isOpen={open} navbar>
             <Nav navbar>
                 <NavItem>
-                    <NavLink tag={RRNavLink} to="/home">
+                    <NavLink tag={RRNavLink} to="/">
                         Home
                     </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                     <NavLink tag={RRNavLink} to="/profile">
                         My Profile
                     </NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem>
                     <NavLink tag={RRNavLink} to="/myevents">
                         My Events

@@ -32,7 +32,12 @@ public class OccasionDTO
 
         // Navigation properties
         public UserProfileDTO HostUserProfile { get; set; }
-        public Category Category { get; set; }
+        public CategoryDTO Category { get; set; }
 
         public List<RSVPDTO> RSVPs { get; set; }
+
+
+        // calculated properties
+        public string FormattedDate => Date.ToString("MMMM dd, yyyy, hh:mm tt");
+
     }

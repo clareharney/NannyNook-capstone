@@ -14,6 +14,7 @@ public class RSVPDTO
         [Required]
         public int OccasionId { get; set; }
 
+        public int HostUserProfileId {get; set; }
         // Navigation properties
         public UserProfileDTO UserProfile { get; set; }
         public OccasionDTO Occasion { get; set; }

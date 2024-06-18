@@ -49,6 +49,6 @@ public class UserProfile
             return $"{FirstName} {LastName}";
         }
     }
-    public ICollection<RSVP> RSVPs { get; set; }
-    public ICollection<Occasion> HostedOccasions { get; set; }
+    public List<RSVP> RSVPs { get; set; }
+    public List<Occasion> HostedOccasions { get; set; }
 }
