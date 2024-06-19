@@ -8,6 +8,7 @@ import OccasionDetails from "./occasions/OccasionDetails.jsx";
 import EditOccasion from "./occasions/EditOccasion.jsx";
 import MyOccasionsList from "./occasions/MyOccasionsList.jsx";
 import HomePage from "./HomePage.jsx";
+import { EditMyProfile } from "./profile/EditProfile.jsx";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -17,7 +18,16 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <HomePage loggedInUser={loggedInUser} />
         </AuthorizedRoute>
       } />
-      
+      <Route path="myprofile">
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <MyProfile loggedInUser={loggedInUser}/>
+        </AuthorizedRoute>} />
+        <Route path="edit/:profileId" element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <EditMyProfile loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        } />
+      </Route>
       <Route path="events">
         <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
           <p>Placeholder</p>

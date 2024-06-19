@@ -33,11 +33,11 @@ return (
                         Home
                     </NavLink>
                 </NavItem>
-                {/* <NavItem>
-                    <NavLink tag={RRNavLink} to="/profile">
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/myprofile">
                         My Profile
                     </NavLink>
-                </NavItem> */}
+                </NavItem>
                 <NavItem>
                     <NavLink tag={RRNavLink} to="/myevents">
                         My Events

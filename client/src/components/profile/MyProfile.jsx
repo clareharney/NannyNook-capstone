@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProfile } from "../../managers/userProfileManager";
-import { Card, CardBody, CardTitle} from "reactstrap";
+import { Card, CardBody, CardTitle, Button} from "reactstrap";
 
 export const MyProfile = ({ loggedInUser }) => {
   const [userProfile, setUserProfile] = useState();
   const { id } = useParams();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getProfile(loggedInUser.id).then(setUserProfile);
@@ -38,6 +40,13 @@ export const MyProfile = ({ loggedInUser }) => {
         <CardBody>
           <CardTitle tag="h5">Bio: {userProfile.bio === null ? "No bio yet!" : userProfile.bio}</CardTitle>
         </CardBody>
+        <Button
+            onClick={() => {
+              navigate(`/myprofile/edit/${loggedInUser.id}`);
+            }}
+          >
+            Edit
+          </Button>
       </Card>
     </>
   );
