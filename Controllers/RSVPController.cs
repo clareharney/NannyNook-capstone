@@ -26,47 +26,78 @@ public class RSVPController : ControllerBase
         return Ok(_dbContext.RSVPs.ToList());
     }
 
-    [HttpPut]
-    [Authorize]
-    
-    public IActionResult UnRSVP(RSVP rsvp)
-    {
-        RSVP rsvpToUpdate = _dbContext.RSVPs.SingleOrDefault((r) => r == rsvp);
-        if(rsvpToUpdate == null)
+    [HttpDelete("{userProfileId}/{occasionId}")]
+        public IActionResult UnRSVP(int userProfileId, int occasionId)
         {
-            return NotFound();
+            try
+            {
+                var rsvp = _dbContext.RSVPs
+                    .FirstOrDefault(r => r.UserProfileId == userProfileId && r.OccasionId == occasionId);
+
+                if (rsvp == null)
+                {
+                    return NotFound("RSVP not found.");
+                }
+
+                _dbContext.RSVPs.Remove(rsvp);
+                _dbContext.SaveChanges();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
-
-        _dbContext.SaveChanges();
-
-        return NoContent();
-    }
 
     [HttpPost]
-    public IActionResult NewRSVP(RSVP rsvp)
+public IActionResult NewRSVP(RSVP rsvp)
+{
+    try
     {
-        RSVP rsvpToAdd = new RSVP
-        {
-            OccasionId = rsvp.OccasionId,
-            UserProfileId = rsvp.UserProfileId
-        };
-        
-        RSVP foundRsvp = _dbContext.RSVPs.SingleOrDefault((r) => r == rsvp);
-        if(foundRsvp == null)
-        {
-            _dbContext.RSVPs.Add(rsvpToAdd);
+        var existingRSVP = _dbContext.RSVPs
+            .FirstOrDefault(r => r.UserProfileId == rsvp.UserProfileId && r.OccasionId == rsvp.OccasionId);
 
-            _dbContext.SaveChanges();
-        }
-        else
+        if (existingRSVP != null)
         {
-            _dbContext.RSVPs.Remove(foundRsvp);
-            _dbContext.RSVPs.Add(rsvpToAdd);
-            _dbContext.SaveChanges();        
+            return BadRequest(new { message = "RSVP already exists." });
         }
-        return Created($"/api/RSVP/{rsvp}", rsvp);
 
+        // Ensure the Occasion exists
+        var occasion = _dbContext.Occasions
+            .FirstOrDefault(o => o.Id == rsvp.OccasionId);
+
+        if (occasion == null)
+        {
+            return BadRequest(new { message = "Occasion does not exist." });
+        }
+
+        // Ensure the UserProfile exists
+        var userProfile = _dbContext.UserProfiles
+            .FirstOrDefault(up => up.Id == rsvp.UserProfileId);
+
+        if (userProfile == null)
+        {
+            return BadRequest(new { message = "UserProfile does not exist." });
+        }
+
+        _dbContext.RSVPs.Add(rsvp);
+        _dbContext.SaveChanges();
+
+        return Created($"/api/RSVP/{rsvp.UserProfileId}/{rsvp.OccasionId}", rsvp);
     }
+    catch (DbUpdateException ex)
+    {
+        // Log the detailed error message for further investigation
+        var errorMessage = ex.InnerException?.Message ?? ex.Message;
+        return StatusCode(500, new { message = $"Internal server error: {errorMessage}" });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { message = $"Internal server error: {ex.Message}" });
+    }
+}
+
 
 
 }
