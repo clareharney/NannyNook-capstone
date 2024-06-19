@@ -33,7 +33,7 @@ public class Occasion
         [Required]
         public DateTime Date { get; set; }
         
-        public string OccasionImage { get; set; }
+        public string? OccasionImage { get; set; }
         
         public int HostUserProfileId { get; set; }
 

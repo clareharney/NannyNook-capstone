@@ -16,6 +16,7 @@ const EditOccasion = ({loggedInUser}) => {
     const [eventDate, setEventDate] = useState(null)
     const [category, setCategory] = useState(0);
     const [categories, setCategories] = useState([]);
+    const [occasionImage, setOccasionImage] = useState("");
     const [occasion, setOccasion] = useState({});
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -36,8 +37,9 @@ const EditOccasion = ({loggedInUser}) => {
                     setState(occasionData.state)
                     setCity(occasionData.city)
                     setEventLocation(occasionData.eventLocation)
-                    setEventDate(occasionData.eventDate)
+                    setEventDate(new Date(occasionData.date))
                     setCategory(occasionData.category)
+                    setOccasionImage(occasionData.occasionImage)
                 } catch (error) {
                     console.error("Error fetching this occasion:", error)
                 }
@@ -51,7 +53,7 @@ const EditOccasion = ({loggedInUser}) => {
         getAllCategories().then(setCategories);
       }, []);
 
-      const handleSave = async (e) => {
+      const handleSave = (e) => {
         e.preventDefault();
         const occasionData = {
             Title: title,
@@ -59,18 +61,20 @@ const EditOccasion = ({loggedInUser}) => {
             City: city,
             State: state,
             Location: eventLocation,
-            Date: eventDate,
+            Date: eventDate.toISOString(),
             CategoryId: category,
-            HostUserProfileId: loggedInUser.id
-            // OccasionImage: occasionImage 
+            HostUserProfileId: loggedInUser.id,
+            OccasionImage: occasionImage
         }
+
+        console.log('Occasion Data:', occasionData)
         
         try {
-          const response = await editOccasion(occasionData, parseInt(occasionId));
+          const response = editOccasion(occasionData, parseInt(occasionId));
           console.log('Response:', response);  // Debug logging
           navigate(`/events/${occasionId}`)
         } catch (error) {
-          console.error("There was an error uploading the file!", error);
+          console.error("There was an error saving the occasion!", error);
         }
       };
 

@@ -85,44 +85,34 @@ public IActionResult CreateOccasion([FromBody] Occasion newOccasionDto)
 
 
 [HttpPut("{id}")]
-
-    public async Task<IActionResult> UpdateOccasion(int id, [FromBody] OccasionDTO occasion)
+public IActionResult UpdateOccasion([FromBody] OccasionDTO occasionDto, int id)
+{
+    if (!ModelState.IsValid)
     {
-        Occasion occasionToEdit = _dbContext.Occasions.FirstOrDefault(o => o.Id == id);
-        if (occasionToEdit == null)
-        {
-            return NotFound();
-        }
-
-        occasionToEdit.Title = occasion.Title;
-        occasionToEdit.Description = occasion.Description;
-        occasionToEdit.CategoryId = occasion.CategoryId;
-        occasionToEdit.City = occasion.City;
-        occasionToEdit.State = occasion.State;
-        occasionToEdit.Location = occasion.Location;
-        occasionToEdit.Date = occasion.Date;
-        occasionToEdit.HostUserProfileId = occasion.HostUserProfileId;
-
-        // if (image != null && image.Length > 0)
-        //     {
-        //         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "client", "public", "uploads");
-        //         if (!Directory.Exists(uploadsFolder))
-        //         {
-        //             Directory.CreateDirectory(uploadsFolder);
-        //         }
-        //         var filePath = Path.Combine(uploadsFolder, image.FileName);
-        //         using (var stream = new FileStream(filePath, FileMode.Create))
-        //         {
-        //             await image.CopyToAsync(stream);
-        //         }
-
-        //         post.HeaderImage = $"/uploads/{image.FileName}";
-        //     }
-
-            _dbContext.SaveChanges();
-
-            return Ok(occasion);
+        return BadRequest(ModelState);
     }
+
+    var occasionToEdit = _dbContext.Occasions.FirstOrDefault(o => o.Id == id);
+    if (occasionToEdit == null)
+    {
+        return NotFound();
+    }
+
+    occasionToEdit.Title = occasionDto.Title;
+    occasionToEdit.Description = occasionDto.Description;
+    occasionToEdit.CategoryId = occasionDto.CategoryId;
+    occasionToEdit.City = occasionDto.City;
+    occasionToEdit.State = occasionDto.State;
+    occasionToEdit.Location = occasionDto.Location;
+    occasionToEdit.Date = occasionDto.Date;
+    occasionToEdit.HostUserProfileId = occasionDto.HostUserProfileId;
+    occasionToEdit.OccasionImage = occasionDto.OccasionImage;
+
+     _dbContext.SaveChanges();
+
+    return Ok(occasionToEdit);
+}
+
 
 
 
