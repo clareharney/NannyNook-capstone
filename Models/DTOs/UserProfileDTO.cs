@@ -38,9 +38,9 @@ public class UserProfileDTO
     public bool IsParent { get; set; }
 
 
-    public string IdentityUserId { get; set; }
+    public string? IdentityUserId { get; set; }
 
-    public IdentityUser IdentityUser { get; set; }
+    public IdentityUser? IdentityUser { get; set; }
 
     public string FullName
     {
@@ -49,6 +49,6 @@ public class UserProfileDTO
             return $"{FirstName} {LastName}";
         }
     }
-    public ICollection<RSVPDTO> RSVPs { get; set; }
-    public ICollection<OccasionDTO> HostedOccasions { get; set; }
+    public ICollection<RSVPDTO>? RSVPs { get; set; }
+    public ICollection<OccasionDTO>? HostedOccasions { get; set; }
 }

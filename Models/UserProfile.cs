@@ -40,7 +40,7 @@ public class UserProfile
 
     public string IdentityUserId { get; set; }
 
-    public IdentityUser IdentityUser { get; set; }
+    public IdentityUser? IdentityUser { get; set; }
 
     public string FullName
     {
@@ -49,6 +49,6 @@ public class UserProfile
             return $"{FirstName} {LastName}";
         }
     }
-    public List<RSVP> RSVPs { get; set; }
-    public List<Occasion> HostedOccasions { get; set; }
+    public List<RSVP>? RSVPs { get; set; }
+    public List<Occasion>? HostedOccasions { get; set; }
 }
