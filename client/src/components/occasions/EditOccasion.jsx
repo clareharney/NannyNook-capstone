@@ -36,9 +36,9 @@ const EditOccasion = ({loggedInUser}) => {
                     setDescription(occasionData.description)
                     setState(occasionData.state)
                     setCity(occasionData.city)
-                    setEventLocation(occasionData.eventLocation)
+                    setEventLocation(occasionData.location)
                     setEventDate(new Date(occasionData.date))
-                    setCategory(occasionData.category)
+                    setCategory(occasionData.categoryId)
                     setOccasionImage(occasionData.occasionImage)
                 } catch (error) {
                     console.error("Error fetching this occasion:", error)
