@@ -15,7 +15,7 @@ const CreateOccasion = ({ loggedInUser }) => {
   const [eventDate, setEventDate] = useState(null)
   const [category, setCategory] = useState(0);
   const [categories, setCategories] = useState([]);
-  const [occasionImage, setOccasionImage] = useState(null)
+  const [occasionImage, setOccasionImage] = useState("")
 
   const navigate = useNavigate();
 
