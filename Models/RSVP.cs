@@ -13,6 +13,6 @@ public class RSVP
         public int OccasionId { get; set; }
 
         // Navigation properties
-        public UserProfile UserProfile { get; set; }
-        public Occasion Occasion { get; set; }
+        public UserProfile? UserProfile { get; set; }
+        public Occasion? Occasion { get; set; }
     }

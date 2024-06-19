@@ -13,6 +13,6 @@ public class RSVPDTO
         public int OccasionId { get; set; }
 
         // Navigation properties
-        public UserProfileDTO UserProfile { get; set; }
-        public OccasionDTO Occasion { get; set; }
+        public UserProfileDTO? UserProfile { get; set; }
+        public OccasionDTO? Occasion { get; set; }
     }
