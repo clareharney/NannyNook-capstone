@@ -26,15 +26,15 @@ public class OccasionDTO
         
         public DateTime Date { get; set; }
         
-        public string OccasionImage { get; set; }
+        public string? OccasionImage { get; set; }
         
         public int HostUserProfileId { get; set; }
 
         // Navigation properties
-        public UserProfileDTO HostUserProfile { get; set; }
-        public CategoryDTO Category { get; set; }
+        public UserProfileDTO? HostUserProfile { get; set; }
+        public CategoryDTO? Category { get; set; }
 
-        public List<RSVPDTO> RSVPs { get; set; }
+        public List<RSVPDTO>? RSVPs { get; set; }
 
 
         // calculated properties

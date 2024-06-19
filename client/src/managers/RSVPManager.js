@@ -17,8 +17,8 @@ export const getRSVPs = () => {
     return fetch(_apiUrl + `/${id}`).then((res) => res.json());
   };
   
-  export const UnRSVP = (RSVP) => {
-      return fetch(_apiUrl + `${_apiUrl}/${RSVP.UserProfileId}/${RSVP.OccasionId}`, {
+  export const UnRSVP = (UserProfileId, OccasionId) => {
+      return fetch(_apiUrl + `/${UserProfileId}/${OccasionId}`, {
         method: "DELETE",
       }).then((response) => {
         if (!response.ok) {

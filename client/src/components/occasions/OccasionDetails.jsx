@@ -94,7 +94,7 @@ const OccasionDetails = ({ loggedInUser }) => {
       };
   
       try {
-          await UnRSVP(RSVP);
+          await UnRSVP(RSVP.userProfileId, RSVP.occasionId);
           refresh();
       } catch (error) {
           console.error("Failed to un-RSVP:", error);

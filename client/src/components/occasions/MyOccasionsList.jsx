@@ -24,7 +24,7 @@ const MyOccasionsList = ({ loggedInUser}) => {
     
         return (
             <div className="container">
-                <h1>Occasions List</h1>
+                <h1>My Events</h1>
                 {occasions.map((o) => (
                     <Card
                         key={o.id}
