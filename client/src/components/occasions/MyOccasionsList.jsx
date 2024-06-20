@@ -22,10 +22,12 @@ const MyOccasionsList = ({ loggedInUser}) => {
         fetchData();
       }, [loggedInUser]);
     
-        return (
-            <div className="container">
-                <h1>My Events</h1>
-                {occasions.map((o) => (
+
+      return (
+        <div className="container">
+            <h1>My Events</h1>
+            {occasions.length > 0 ? (
+                occasions.map((o) => (
                     <Card
                         key={o.id}
                         style={{
@@ -50,9 +52,17 @@ const MyOccasionsList = ({ loggedInUser}) => {
                             </Button>
                         </CardBody>
                     </Card>
-                ))}
-            </div>
-        );
+                ))
+            ) : (
+                <div>
+                    <p>You haven't created an event yet!</p>
+                    <Button onClick={() => navigate("/events/create")}>
+                        Create an Event
+                    </Button>
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default MyOccasionsList
