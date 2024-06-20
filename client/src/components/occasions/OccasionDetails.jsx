@@ -126,20 +126,15 @@ const OccasionDetails = ({ loggedInUser }) => {
                 <img alt="Sample" src={occasion.occasionImage} />
                 <CardBody>
                     <CardTitle tag="h5">{occasion.title}</CardTitle>
-                    <CardSubtitle className="mb-2 text-muted" tag="h6">
-                        <Link
-                            to={
-                                occasion.hostUserProfileId !== loggedInUser.id
-                                    ? `/occasions/${occasion.hostUserProfile?.id}/${occasion.hostUserProfile?.identityUser?.userName}`
-                                    : null
-                            }
-                        >
-                            {occasion.hostUserProfile?.identityUser?.userName}
-                        </Link>
-                    </CardSubtitle>
+                    <CardText className="mb-2 text-muted" tag="h6">
+                    {occasion.hostUserProfileId === loggedInUser.id
+                            ? "Hosted by you"
+                            : `Hosted by ${occasion.hostUserProfile?.fullName}`}
+                    </CardText>
                     <CardText>{occasion.description}</CardText>
-                    <CardText>{formatDate(occasion.date)}</CardText>
-                    <CardText>{occasion.location}</CardText>
+                    <CardText>{`On: ${formatDate(occasion.date)}`}</CardText>
+                    <CardText>{`In ${occasion.city}, ${occasion.state}`}</CardText>
+                    <CardText>{`At ${occasion.location}`}</CardText>
                     {occasion.hostUserProfileId === loggedInUser.id ? (
                         <>
                             <CardText>RSVP Count: {rsvpCount}</CardText>
