@@ -9,6 +9,7 @@ import EditOccasion from "./occasions/EditOccasion.jsx";
 import MyOccasionsList from "./occasions/MyOccasionsList.jsx";
 import HomePage from "./HomePage.jsx";
 import { EditMyProfile } from "./profile/EditProfile.jsx";
+import RSVPdOccasions from "./occasions/RSVPdOccasions.jsx";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -51,7 +52,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         } />
       </Route>
 
-      {/* <Route path="myprofile" element={<MyProfile loggedInUser={loggedInUser} />} /> */}
+      <Route path="myrsvps" element={<RSVPdOccasions loggedInUser={loggedInUser} />} />
       <Route path="login" element={<Login setLoggedInUser={setLoggedInUser} />} />
       <Route path="register" element={<Register setLoggedInUser={setLoggedInUser} />} />
       <Route path="*" element={<p>Whoops, nothing here...</p>} />

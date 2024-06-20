@@ -48,6 +48,11 @@ return (
                         Create An Event
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/myrsvps">
+                        My RSVP'd Events
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

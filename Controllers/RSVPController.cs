@@ -20,11 +20,71 @@ public class RSVPController : ControllerBase
         _dbContext = context;
     }
 
-    [HttpGet]
-    public IActionResult GetRSVPs()
-    {
-        return Ok(_dbContext.RSVPs.ToList());
-    }
+    // [HttpGet]
+    // public IActionResult GetRSVPs()
+    // {
+    //     return Ok(_dbContext.RSVPs.ToList());
+    // }
+
+//     [HttpGet]
+// public IActionResult GetRSVPs()
+// {
+//     var rsvp = _dbContext.RSVPs
+//         .Include(r => r.UserProfile)
+//         .Include(r => r.Occasion)
+
+//     if (rsvp == null)
+//     {
+//         return NotFound();
+//     }
+
+//     return Ok(rsvp);
+// }
+
+[HttpGet]
+        public IActionResult GetRSVPs()
+        {
+            var rsvps = _dbContext.RSVPs
+                .Include(r => r.UserProfile)
+                .Include(r => r.Occasion)
+                .Select(r => new RSVPDTO
+                {
+                    UserProfileId = r.UserProfileId,
+                    OccasionId = r.OccasionId,
+                    UserProfile = new UserProfileDTO
+                    {
+                        Id = r.UserProfile.Id,
+                        FirstName = r.UserProfile.FirstName,
+                        LastName = r.UserProfile.LastName,
+                        Bio = r.UserProfile.Bio,
+                        Location = r.UserProfile.Location,
+                        ProfileImage = r.UserProfile.ProfileImage,
+                        IsNanny = r.UserProfile.IsNanny,
+                        IsParent = r.UserProfile.IsParent
+                    },
+                    Occasion = new OccasionDTO
+                    {
+                        Id = r.Occasion.Id,
+                        Title = r.Occasion.Title,
+                        Description = r.Occasion.Description,
+                        State = r.Occasion.State,
+                        City = r.Occasion.City,
+                        Location = r.Occasion.Location,
+                        CategoryId = r.Occasion.CategoryId,
+                        Date = r.Occasion.Date,
+                        OccasionImage = r.Occasion.OccasionImage,
+                        HostUserProfileId = r.Occasion.HostUserProfileId
+                    }
+                })
+                .ToList();
+
+            if (!rsvps.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(rsvps);
+        }
 
     [HttpDelete("{userProfileId}/{occasionId}")]
         public IActionResult UnRSVP(int userProfileId, int occasionId)
