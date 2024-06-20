@@ -16,6 +16,11 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
     <Routes>
       <Route path="/" element={
         <AuthorizedRoute loggedInUser={loggedInUser}>
+          <p>Welcome to NannyNook!!</p>
+        </AuthorizedRoute>
+      } />
+      <Route path="home" element={
+        <AuthorizedRoute loggedInUser={loggedInUser}>
           <HomePage loggedInUser={loggedInUser} />
         </AuthorizedRoute>
       } />
