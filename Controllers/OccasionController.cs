@@ -90,38 +90,6 @@ public IActionResult GetOccasionById(int id)
 }
 
 
-    // [HttpGet("{id}")]
-
-    // public IActionResult GetOccasionById(int id)
-    // {
-    //     var occasions = _dbContext.Occasions
-    //     .Include(o => o.HostUserProfile)
-    //     .Include(o => o.Category)
-    //     .Include(o => o.RSVPs)
-    //     .Select(o => new OccasionDTO
-    //     {
-    //         Id = o.Id,
-    //         Title = o.Title,
-    //         Description = o.Description,
-    //         State = o.State,
-    //         City = o.City,
-    //         Location = o.Location,
-    //         CategoryId = o.CategoryId,
-    //         Date = o.Date,
-    //         OccasionImage = o.OccasionImage,
-    //         HostUserProfileId = o.HostUserProfileId,
-    //         RSVPs = o.RSVPs.Select(r => new RSVPDTO 
-    //         {
-    //             UserProfileId = r.UserProfileId,
-    //             OccasionId = r.OccasionId
-    //         }).ToList()
-    //     }
-    //     ).SingleOrDefault(o => o.Id == id);
-
-    //     return Ok(occasions);
-    // }
-
-
 
 
 
