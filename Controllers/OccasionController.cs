@@ -92,7 +92,6 @@ public IActionResult GetOccasionById(int id)
 
 
 
-
 [HttpPut("{id}")]
 public IActionResult UpdateOccasion([FromBody] OccasionDTO occasionDto, int id)
 {
