@@ -18,19 +18,6 @@ public class UserProfileController : ControllerBase
         _dbContext = context;
     }
 
-    // [HttpGet("{id}")]
-    //     public IActionResult GetUserProfile(int id)
-    //     {
-    //         var userProfile = _dbContext.UserProfiles.Find(id);
-
-    //         if (userProfile == null)
-    //         {
-    //             return NotFound();
-    //         }
-
-    //         return Ok(userProfile);
-    //     }
-
         [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
@@ -87,45 +74,5 @@ public IActionResult UpdateProfile([FromBody] UserProfileDTO profileDTO, int id)
 
     return Ok(userProfile);
 }
-
-
-//         [HttpPut("{id}")]
-// public IActionResult UpdateProfile([FromBody] UserProfileDTO profileDTO, int id)
-// {
-
-//     UserProfile userProfile = _dbContext.UserProfiles
-//             .Include(up => up.IdentityUser)
-//             .SingleOrDefault(up => up.Id == id);
-//             if (userProfile == null)
-//             {
-//                 return NotFound();
-//             }
-
-//             userProfile.FirstName = profileDTO.FirstName;
-//             userProfile.LastName = profileDTO.LastName;
-//             userProfile.IdentityUser.UserName = profileDTO.IdentityUser.UserName;
-//             userProfile.IdentityUser.Email = profileDTO.Email;
-//     // if (!ModelState.IsValid)
-//     // {
-//     //     return BadRequest(ModelState);
-//     // }
-
-//     // var profileToEdit = _dbContext.UserProfiles.FirstOrDefault(p => p.Id == id);
-//     // if (profileToEdit == null)
-//     // {
-//     //     return NotFound();
-//     // }
-
-//     // profileToEdit.FirstName = profileDTO.FirstName;
-//     // profileToEdit.LastName = profileDTO.LastName;
-//     // profileToEdit.Bio = profileDTO.Bio;
-//     // profileToEdit.Location = profileDTO.Location;
-//     // profileToEdit.Email = profileDTO.Email;
-//     // profileToEdit.UserName = profileDTO.UserName;
-
-//     //  _dbContext.SaveChanges();
-
-//     return Ok(userProfile);
-// }
 
 }
