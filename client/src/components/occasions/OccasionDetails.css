@@ -1,0 +1,65 @@
+.occasion-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensure the card is centered vertically */
+    padding: 20px;
+}
+
+.occasion-card {
+    width: 70%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+}
+
+.occasion-card .occasion-image {
+    width: 100%; 
+    max-height: 300px; 
+    object-fit: cover; 
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.occasion-card .card-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.occasion-card .occasion-description {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.occasion-card .card-text {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.occasion-card .rsvp-count {
+    font-size: 1em;
+    margin-top: 15px;
+}
+
+.occasion-card .occasion-btns {
+    margin-top: 20px;
+}
+
+.confirmation-modal {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.confirmation-modal p {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .occasion-card {
+        width: 90%;
+    }
+}

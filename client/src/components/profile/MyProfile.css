@@ -1,0 +1,54 @@
+/* MyProfile.css */
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background color for readability */
+    padding: 20px;
+    margin: auto;
+  }
+  
+  .profile-card {
+    width: 25rem;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #dee2e6;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-title {
+    margin-bottom: 1rem;
+  }
+  
+  .edit-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  

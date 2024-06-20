@@ -156,7 +156,7 @@ public class JobController : ControllerBase
 
                 jobDTO.Id = job.Id; // Update jobDTO with the generated ID
 
-                return CreatedAtAction(nameof(GetJobById), new { id = job.Id }, jobDTO);
+                return CreatedAtAction(nameof(GetJobById), new { id = jobDTO.Id }, jobDTO);
             }
             catch (Exception ex)
             {

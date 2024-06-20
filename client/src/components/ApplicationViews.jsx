@@ -12,13 +12,19 @@ import { EditMyProfile } from "./profile/EditProfile.jsx";
 import RSVPdOccasions from "./occasions/RSVPdOccasions.jsx";
 import JobDetails from "./jobs/JobDetails.jsx";
 import AllJobs from "./jobs/AllJobs.jsx";
+import MyJobsList from "./jobs/MyJobs.jsx";
+import EditJob from "./jobs/EditAJob.jsx";
+import CreateJob from "./jobs/CreateAJob.jsx";
+import AllResources from "./resources/AllResources.jsx";
+import ResourceDetails from "./resources/ResourceDetails.jsx";
+import WelcomeMessage from "./WelcomeMessage.jsx";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
       <Route path="/" element={
         <AuthorizedRoute loggedInUser={loggedInUser}>
-          <p>Welcome to NannyNook!!</p>
+          <WelcomeMessage />
         </AuthorizedRoute>
       } />
       <Route path="home" element={
@@ -64,10 +70,30 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <AllJobs loggedInUser={loggedInUser} />
         </AuthorizedRoute>} />
         <Route path="create" element={<AuthorizedRoute loggedInUser={loggedInUser}>
-          <p>Create A Job form will go here</p>
+          <CreateJob loggedInUser={loggedInUser} />
         </AuthorizedRoute>} />
         <Route path=":id" element={<AuthorizedRoute loggedInUser={loggedInUser}>
           <JobDetails loggedInUser={loggedInUser} />
+        </AuthorizedRoute>} />
+      </Route>
+
+      <Route path="myjobs">
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <MyJobsList loggedInUser={loggedInUser}/>
+        </AuthorizedRoute>} />
+        <Route path="edit/:jobId" element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <EditJob loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        } />
+      </Route>
+
+      <Route path="resources">
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <AllResources />
+        </AuthorizedRoute>} />
+        <Route path=":id" element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <ResourceDetails />
         </AuthorizedRoute>} />
       </Route>
 
