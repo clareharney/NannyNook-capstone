@@ -10,6 +10,8 @@ import MyOccasionsList from "./occasions/MyOccasionsList.jsx";
 import HomePage from "./HomePage.jsx";
 import { EditMyProfile } from "./profile/EditProfile.jsx";
 import RSVPdOccasions from "./occasions/RSVPdOccasions.jsx";
+import JobDetails from "./jobs/JobDetails.jsx";
+import AllJobs from "./jobs/AllJobs.jsx";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -55,6 +57,18 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             <EditOccasion loggedInUser={loggedInUser} />
           </AuthorizedRoute>
         } />
+      </Route>
+
+      <Route path="jobs">
+        <Route index element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <AllJobs loggedInUser={loggedInUser} />
+        </AuthorizedRoute>} />
+        <Route path="create" element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <p>Create A Job form will go here</p>
+        </AuthorizedRoute>} />
+        <Route path=":id" element={<AuthorizedRoute loggedInUser={loggedInUser}>
+          <JobDetails loggedInUser={loggedInUser} />
+        </AuthorizedRoute>} />
       </Route>
 
       <Route path="myrsvps" element={<RSVPdOccasions loggedInUser={loggedInUser} />} />

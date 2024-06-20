@@ -21,5 +21,10 @@ namespace NannyNook.Models
         public bool FullTime { get; set; }
         [Required]
         public string ContactInformation { get; set; }
+
+        public int PosterId {get; set; }
+
+        // Navigation properties
+        public UserProfile? Poster { get; set; }
     }
 }
