@@ -4,7 +4,7 @@ export const getResources  = async () => {
     return await fetch(_apiUrl).then((res) => res.json());
   };
 
-export const getResourceById = async () => {
+export const getResourceById = async (id) => {
     return await fetch(_apiUrl + `/${id}`).then((res) => res.json());
 };
 

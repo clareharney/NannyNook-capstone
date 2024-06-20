@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import { getOccasionById, deleteOccasion } from "../../managers/occasionManager.js";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     Card,
     CardBody,
     CardTitle,
-    CardSubtitle,
     CardText,
-    CardFooter,
     Button,
     Modal,
-    ModalHeader,
-    ModalBody,
     ModalFooter,
-    Form,
-    FormGroup,
-    Label,
-    Input,
 } from "reactstrap";
 import { getRSVPs, NewRSVP, UnRSVP } from "../../managers/RSVPManager.js";
+import "./OccasionDetails.css"; // Import the CSS file for styling
 
 const OccasionDetails = ({ loggedInUser }) => {
     const [occasion, setOccasion] = useState({});
@@ -116,29 +109,21 @@ const OccasionDetails = ({ loggedInUser }) => {
     }, [occasion, loggedInUser.id]);
 
     return (
-        <>
-            <Card
-                key={id}
-                style={{
-                    width: "25rem",
-                }}
-            >
-                <img alt="Sample" src={occasion.occasionImage} />
+        <div className="occasion-details-container">
+            <Card className="occasion-card">
+                <img className="occasion-image" alt="Event" src={occasion.occasionImage} />
                 <CardBody>
-                    <CardTitle tag="h5">{occasion.title}</CardTitle>
-                    <CardText className="mb-2 text-muted" tag="h6">
-                    {occasion.hostUserProfileId === loggedInUser.id
-                            ? "Hosted by you"
-                            : `Hosted by ${occasion.hostUserProfile?.fullName}`}
-                    </CardText>
-                    <CardText>{occasion.description}</CardText>
+                    <CardTitle tag="h2">{occasion.title}</CardTitle>
+                    <CardText className="occasion-description">{occasion.description}</CardText>
+                    <CardText>{`Hosted by ${occasion.hostUserProfile?.fullName}`}</CardText>
                     <CardText>{`On: ${formatDate(occasion.date)}`}</CardText>
-                    <CardText>{`In ${occasion.city}, ${occasion.state}`}</CardText>
-                    <CardText>{`At ${occasion.location}`}</CardText>
-                    {occasion.hostUserProfileId === loggedInUser.id ? (
-                        <>
-                            <CardText>RSVP Count: {rsvpCount}</CardText>
-                            <div className="post-btns">
+                    <CardText>{`Location: ${occasion.location}, ${occasion.city}, ${occasion.state}`}</CardText>
+                    {occasion.hostUserProfileId === loggedInUser.id && (
+                        <CardText className="rsvp-count">RSVP Count: {rsvpCount}</CardText>
+                    )}
+                    <div className="occasion-btns">
+                        {occasion.hostUserProfileId === loggedInUser.id ? (
+                            <>
                                 <Button onClick={() => navigate(`/myevents/edit/${occasion.id}`)}>
                                     Edit Event
                                 </Button>
@@ -150,34 +135,15 @@ const OccasionDetails = ({ loggedInUser }) => {
                                 >
                                     Delete
                                 </Button>
-                            </div>
-                            {showConfirmation && (
-                                <div className="confirmation-modal">
-                                    <p>Are you sure you want to delete this event?</p>
-                                    <Button onClick={handleConfirmDelete}>Delete</Button>
-                                    <Button onClick={handleCancelDelete}>Cancel</Button>
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <div>
-                            {!userRsvps ? (
-                                <Button
-                                    className="post-btns"
-                                    onClick={handleRSVP}
-                                >
-                                    RSVP
-                                </Button>
-                            ) : (
-                                <Button
-                                    className="post-btns"
-                                    onClick={handleUnRSVP}
-                                >
-                                    Un-RSVP
-                                </Button>
-                            )}
-                        </div>
-                    )}
+                            </>
+                        ) : (
+                            <Button
+                                onClick={userRsvps ? handleUnRSVP : handleRSVP}
+                            >
+                                {userRsvps ? "Un-RSVP" : "RSVP"}
+                            </Button>
+                        )}
+                    </div>
                 </CardBody>
             </Card>
             <Modal isOpen={modal} toggle={toggle}>
@@ -193,8 +159,16 @@ const OccasionDetails = ({ loggedInUser }) => {
                     </Button>
                 </ModalFooter>
             </Modal>
-        </>
+            {showConfirmation && (
+                <div className="confirmation-modal">
+                    <p>Are you sure you want to delete this event?</p>
+                    <Button onClick={handleConfirmDelete}>Delete</Button>
+                    <Button onClick={handleCancelDelete}>Cancel</Button>
+                </div>
+            )}
+        </div>
     );
 };
 
 export default OccasionDetails;
+

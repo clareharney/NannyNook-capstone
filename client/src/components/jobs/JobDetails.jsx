@@ -17,13 +17,12 @@ import {
     Label,
     Input,
 } from "reactstrap";
-import { getRSVPs, NewRSVP, UnRSVP } from "../../managers/RSVPManager.js";
-import { getJobById } from "../../managers/jobManager.js";
+import { deleteJob, getJobById } from "../../managers/jobManager.js";
 
 const JobDetails = ({ loggedInUser }) => {
     const [job, setJob] = useState({});
     const [modal, setModal] = useState(false);
-    const [jobToDelete, setJobToDelete] = useState({});
+    const [jobIdToDelete, setJobIdToDelete] = useState({});
     const [showConfirmation, setShowConfirmation] = useState(false);
     const toggle = () => setModal(!modal);
     const { id } = useParams();
@@ -35,17 +34,10 @@ const JobDetails = ({ loggedInUser }) => {
         });
     }, [id]);
 
-    const refresh = () => {
-        getOccasionById(id).then((obj) => {
-            setOccasion(obj);
-            setRsvpCount(obj.rsvPs.length);
-        });
-    };
-
     const handleDeleteJob = async (jobId) => {
         try {
-            await deleteJob(occasionId).then(() => {
-                navigate("/myevents");
+            await deleteJob(jobId).then(() => {
+                navigate("/myjobs");
             });
         } catch (error) {
             console.error("Error deleting this post:", error);
@@ -53,7 +45,7 @@ const JobDetails = ({ loggedInUser }) => {
     };
 
     const handleConfirmDelete = () => {
-        handleDeleteJob(jobToDelete);
+        handleDeleteJob(jobIdToDelete);
         setShowConfirmation(false);
     };
 
@@ -65,7 +57,7 @@ const JobDetails = ({ loggedInUser }) => {
     return (
         <>
             <Card
-                key={id}
+                key={job.id}
                 style={{
                     width: "25rem",
                 }}
@@ -80,15 +72,15 @@ const JobDetails = ({ loggedInUser }) => {
                     <CardText>{`add full time ternary here`}</CardText>
                     <CardText>{`Contact ${job.contactInformation} for more information`}</CardText>
                     {/* <CardText>{`Posted By: ${job.poster.fullName}`}</CardText> */}
-                    {job.PosterId === loggedInUser.id ? (
+                    {job.posterId === loggedInUser.id ? (
                         <>
                             <div className="post-btns">
                                 <Button onClick={() => navigate(`/myjobs/edit/${job.id}`)}>
-                                    Edit Event
+                                    Edit
                                 </Button>
                                 <Button
                                     onClick={() => {
-                                        setJobToDelete(job.id);
+                                        setJobIdToDelete(job.id);
                                         setShowConfirmation(true);
                                     }}
                                 >

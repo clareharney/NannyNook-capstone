@@ -1,49 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
 import { getJobByNotUserId } from '../../managers/jobManager.js';
+import './AllJobs.css';
 
-const AllJobs = ({loggedInUser}) => {
-const [jobs, setJobs] = useState([]);
-const navigate = useNavigate();
+const AllJobs = ({ loggedInUser }) => {
+  const [jobs, setJobs] = useState([]);
+  const navigate = useNavigate();
 
-useEffect(() => {
+  useEffect(() => {
     getJobByNotUserId(loggedInUser.id).then((arr) => setJobs(arr));
-  }, []);
-
+  }, [loggedInUser.id]);
 
   return (
-    <>
     <div className="container">
-                <h1>Events List</h1>
-                {jobs.map((j) => (
-                    
-                    <Card
-                        key={j.id}
-                        style={{
-                            width: "10rem",
-                        }}
-                    >
-                        <CardBody>
-                            <CardTitle tag="h5">{j.title}</CardTitle>
-                            <CardSubtitle className="mb-2 text-muted" tag="h6">
-                                {j.poster.fullName}
-                            </CardSubtitle>
-                            <CardText>Number of Children : {j.numberOfKids}</CardText>
-                            <CardText>{`$${j.payRateMin}-$${j.payRateMax} an hour`}</CardText>
-                            <Button
-                                onClick={() => {
-                                    navigate(`/jobs/${j.id}`);
-                                }}
-                            >
-                                View Job
-                            </Button>
-                        </CardBody>
-                    </Card>
-                ))}
-            </div>
-    </>
+      <h1>All Jobs</h1>
+      <div className="grid-container">
+        {jobs.map((j) => (
+          <div className="grid-item" key={j.id}>
+            <Card style={{ width: '100%' }}>
+              <CardBody>
+                <CardTitle tag="h5">{j.title}</CardTitle>
+                <CardSubtitle className="mb-2 text-muted" tag="h6">
+                  {j.poster.fullName}
+                </CardSubtitle>
+                <CardText>Number of Children : {j.numberOfKids}</CardText>
+                <CardText>{`$${j.payRateMin}-$${j.payRateMax} an hour`}</CardText>
+                <Button
+                  onClick={() => {
+                    navigate(`/jobs/${j.id}`);
+                  }}
+                >
+                  View Job
+                </Button>
+              </CardBody>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
 export default AllJobs;
+
