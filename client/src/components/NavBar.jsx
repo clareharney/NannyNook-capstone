@@ -53,6 +53,26 @@ return (
                         My RSVP'd Events
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/jobs">
+                        Job Postings
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/myjobs">
+                        My Jobs
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/jobs/create">
+                        Create A Job Posting
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/resources">
+                        Child Resources
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

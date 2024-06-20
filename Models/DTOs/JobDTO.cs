@@ -1,6 +1,8 @@
+using NannyNook.Models.DTOs;
+
 namespace NannyNook.DTOs
 {
-    public class JobDto
+    public class JobDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -10,5 +12,10 @@ namespace NannyNook.DTOs
         public int NumberOfKids { get; set; }
         public bool FullTime { get; set; }
         public string ContactInformation { get; set; }
+
+        public int PosterId {get; set; }
+
+        // Navigation properties
+        public UserProfileDTO? Poster { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 namespace NannyNook.DTOs
 {
-    public class ResourceDto
+    public class ResourceDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }

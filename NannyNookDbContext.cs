@@ -344,7 +344,8 @@ namespace NannyNookcapstone.Data
                     PayRateMax = 20.00M,
                     NumberOfKids = 2,
                     FullTime = true,
-                    ContactInformation = "email@example.com"
+                    ContactInformation = "email@example.com",
+                    PosterId = 1
                 },
                 new Job
                 {
@@ -355,7 +356,8 @@ namespace NannyNookcapstone.Data
                     PayRateMax = 15.00M,
                     NumberOfKids = 1,
                     FullTime = false,
-                    ContactInformation = "phone@example.com"
+                    ContactInformation = "phone@example.com",
+                    PosterId = 2
                 },
                 new Job
                 {
@@ -366,7 +368,8 @@ namespace NannyNookcapstone.Data
                     PayRateMax = 18.00M,
                     NumberOfKids = 3,
                     FullTime = false,
-                    ContactInformation = "contact@example.com"
+                    ContactInformation = "contact@example.com",
+                    PosterId = 3
                 },
                 new Job
                 {
@@ -377,7 +380,8 @@ namespace NannyNookcapstone.Data
                     PayRateMax = 25.00M,
                     NumberOfKids = 4,
                     FullTime = true,
-                    ContactInformation = "livein@example.com"
+                    ContactInformation = "livein@example.com",
+                    PosterId = 4
                 }
             });
             modelBuilder.Entity<Resource>().HasData(new Resource[]
