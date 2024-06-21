@@ -117,7 +117,8 @@ const OccasionDetails = ({ loggedInUser }) => {
                     <CardText className="occasion-description">{occasion.description}</CardText>
                     <CardText>{`Hosted by ${occasion.hostUserProfile?.fullName}`}</CardText>
                     <CardText>{`On: ${formatDate(occasion.date)}`}</CardText>
-                    <CardText>{`Location: ${occasion.location}, ${occasion.city}, ${occasion.state}`}</CardText>
+                    <CardText>{`Location: ${occasion.location}`}</CardText>
+                    <CardText>{`In ${occasion.city}, ${occasion.state}`}</CardText>
                     {occasion.hostUserProfileId === loggedInUser.id && (
                         <CardText className="rsvp-count">RSVP Count: {rsvpCount}</CardText>
                     )}
