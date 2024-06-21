@@ -14,7 +14,7 @@ const EditOccasion = ({ loggedInUser }) => {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [eventLocation, setEventLocation] = useState("");
-  const [eventDate, setEventDate] = useState(null);
+  const [eventDate, setEventDate] = useState(new Date());
   const [category, setCategory] = useState(0);
   const [categories, setCategories] = useState([]);
   const [occasionImage, setOccasionImage] = useState("");
@@ -22,10 +22,6 @@ const EditOccasion = ({ loggedInUser }) => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const navigate = useNavigate();
-
-  const fileSelectedHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
 
   useEffect(() => {
     if (occasionId) {
