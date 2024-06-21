@@ -20,6 +20,8 @@ const CreateOccasion = ({ loggedInUser }) => {
 
   const navigate = useNavigate();
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newOccasion = {
@@ -118,6 +120,7 @@ const CreateOccasion = ({ loggedInUser }) => {
               timeCaption="Time"
               dateFormat="MMMM d, yyyy h:mm aa"
               className="form-input"
+              timeZone="CST"
             />
           </div>
         </FormGroup>

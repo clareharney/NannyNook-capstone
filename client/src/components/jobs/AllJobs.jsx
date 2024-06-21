@@ -14,7 +14,7 @@ const AllJobs = ({ loggedInUser }) => {
 
   return (
     <div className="container">
-      <h1>All Jobs</h1>
+      <h1>Job Board</h1>
       <div className="grid-container">
         {jobs.map((j) => (
           <div className="grid-item-jobs" key={j.id}>

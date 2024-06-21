@@ -36,11 +36,6 @@ return (
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={RRNavLink} to="/resources">
-                        Child Resources
-                    </NavLink>
-                </NavItem>
-                <NavItem>
                     <NavLink tag={RRNavLink} to="/myevents">
                         My Events
                     </NavLink>
@@ -53,6 +48,11 @@ return (
                 <NavItem>
                     <NavLink tag={RRNavLink} to="/jobs">
                         Job Postings
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/resources">
+                        Child Resources
                     </NavLink>
                 </NavItem>
                 <NavItem>

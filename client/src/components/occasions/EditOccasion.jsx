@@ -23,37 +23,41 @@ const EditOccasion = ({loggedInUser}) => {
 
     const navigate = useNavigate()
 
+    
+
 
     useEffect(() => {
-        if (occasionId) {
-            const fetchOccasion = async () => {
-                try {
-                    const occasionData = await getOccasionById(occasionId)
-                    setOccasion(occasionData)
-                    setTitle(occasionData.title)
-                    setDescription(occasionData.description)
-                    setState(occasionData.state)
-                    setCity(occasionData.city)
-                    setEventLocation(occasionData.location)
-                    setEventDate(new Date(occasionData.date))
-                    setCategory(occasionData.categoryId)
-                    setOccasionImage(occasionData.occasionImage)
-                } catch (error) {
-                    console.error("Error fetching this occasion:", error)
-                }
+      if (occasionId) {
+        const fetchOccasion = async () => {
+          try {
+            const occasionData = await getOccasionById(occasionId)
+            setOccasion(occasionData)
+            setTitle(occasionData.title)
+            setDescription(occasionData.description)
+            setState(occasionData.state)
+            setCity(occasionData.city)
+            setEventLocation(occasionData.location)
+            setEventDate(new Date(occasionData.date))
+            setCategory(occasionData.categoryId)
+            setOccasionImage(occasionData.occasionImage)
+            } catch (error) {
+              console.error("Error fetching this occasion:", error)
+              }
             }
-
+            
             fetchOccasion()
-        }
-    }, [occasionId])
-
-    useEffect(() => {
-        getAllCategories().then(setCategories);
-      }, []);
-
-      const handleSave = (e) => {
-        e.preventDefault();
-        const occasionData = {
+            }
+            }, [occasionId])
+            
+            useEffect(() => {
+              getAllCategories().then(setCategories);
+              }, []);
+              
+              const handleSave = (e) => {
+                e.preventDefault();
+                
+            
+            const occasionData = {
             Title: title,
             Description: description,
             City: city,
@@ -150,6 +154,7 @@ const EditOccasion = ({loggedInUser}) => {
                     timeIntervals={15}
                     timeCaption="Time"
                     dateFormat="MMMM d, yyyy h:mm aa"
+                    timeZone="local"
                 />
               </div>
             </FormGroup>
