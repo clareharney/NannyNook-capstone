@@ -1,10 +1,16 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Flamenco:wght@300;400&family=Glass+Antiqua&family=Playwrite+BR:wght@100..400&display=swap');
+
+
+
 body {
   background-image: url('https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
-  font-family: Arial, sans-serif; 
+  font-family: "Bungee Shade", sans-serif;
+  font-weight: 400;
+  font-style: normal;; 
   margin: 0; 
   padding: 0; 
   height: 100%; 
@@ -30,6 +36,27 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* p {
-  
-} */
+.bungee-shade-regular {
+  font-family: "Bungee Shade", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.flamenco-light {
+  font-family: "Flamenco", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.flamenco-regular {
+  font-family: "Flamenco", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.glass-antiqua-regular {
+  font-family: "Glass Antiqua", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+

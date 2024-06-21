@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Flamenco:wght@300;400&family=Glass+Antiqua&family=Playwrite+BR:wght@100..400&display=swap');
+
+
 .occasion-details-container {
     display: flex;
     justify-content: center;
@@ -14,6 +17,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 20px;
+    margin: 60px;
 }
 
 .occasion-card .occasion-image {
