@@ -44,10 +44,11 @@ export default function Register({ setLoggedInUser }) {
 
   return (
     <div className="container" style={{ maxWidth: "500px" }}>
-      <h3>Sign Up</h3>
+      <h3 className="header">Sign Up</h3>
       <FormGroup>
         <Label>First Name</Label>
         <Input
+        className="sub-header"
           type="text"
           value={firstName}
           onChange={(e) => {
@@ -58,6 +59,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>Last Name</Label>
         <Input
+        className="sub-header"
           type="text"
           value={lastName}
           onChange={(e) => {
@@ -68,6 +70,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>Email</Label>
         <Input
+        className="sub-header"
           type="email"
           value={email}
           onChange={(e) => {
@@ -78,6 +81,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>User Name</Label>
         <Input
+        className="sub-header"
           type="text"
           value={userName}
           onChange={(e) => {
@@ -88,6 +92,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>Location</Label>
         <Input
+        className="sub-header"
           type="text"
           value={location}
           onChange={(e) => {
@@ -98,6 +103,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>Password</Label>
         <Input
+        className="sub-header"
           invalid={passwordMismatch}
           type="password"
           value={password}
@@ -110,6 +116,7 @@ export default function Register({ setLoggedInUser }) {
       <FormGroup>
         <Label>Confirm Password</Label>
         <Input
+        className="sub-header"
           invalid={passwordMismatch}
           type="password"
           value={confirmPassword}

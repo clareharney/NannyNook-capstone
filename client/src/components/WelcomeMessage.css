@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Flamenco:wght@300;400&family=Glass+Antiqua&family=Playwrite+BR:wght@100..400&display=swap');
+
+
 .welcome-container {
     text-align: center;
     padding: 40px; /* Adjust padding for spacing */
@@ -10,13 +14,16 @@
     transform: translate(-50%, -50%); /* Center the container */
   }
   .welcome-title {
+    font-family: "Bungee Shade", sans-serif;
     font-size: 3rem; /* Adjust font size as needed */
     margin-bottom: 20px; /* Bottom margin for separation */
     color: #FCC006; /* Title color */
   }
   
   .welcome-text {
-    font-size: 1.2rem; /* Adjust font size as needed */
+    font-family: "Flamenco", system-ui;
+    font-weight: 400;
+    font-size: 2rem; /* Adjust font size as needed */
     color: #DA1998; /* Text color */
     line-height: 1.5; /* Line height for readability */
     margin-bottom: 10px; /* Bottom margin for separation */

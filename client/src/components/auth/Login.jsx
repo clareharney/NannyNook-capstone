@@ -23,10 +23,11 @@ export default function Login({ setLoggedInUser }) {
 
   return (
     <div className="container" style={{ maxWidth: "500px" }}>
-      <h3>Login</h3>
+      <h3 className="header">Login</h3>
       <FormGroup>
         <Label>Email</Label>
         <Input
+        className="sub-header"
           invalid={failedLogin}
           type="text"
           value={email}
@@ -39,6 +40,7 @@ export default function Login({ setLoggedInUser }) {
       <FormGroup>
         <Label>Password</Label>
         <Input
+        className="sub-header"
           invalid={failedLogin}
           type="password"
           value={password}
