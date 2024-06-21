@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { editJob, getJobById } from "../../managers/jobManager.js";
+import "./CreateJob.css"
 
 const EditJob = ({loggedInUser}) => {
     const {jobId} = useParams()
+    const [job, setJob] = useState({})
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("")
     const [minimumRate, setMinimumRate] = useState(null)
@@ -21,11 +23,11 @@ const EditJob = ({loggedInUser}) => {
             const fetchJob = async () => {
                 try {
                     const jobData = await getJobById(jobId)
-                    setOccasion(jobData)
+                    setJob(jobData)
                     setTitle(jobData.title)
                     setDescription(jobData.description)
-                    setMinimumRate(jobData.minimumRate)
-                    setMaximumRate(jobData.maximumRate)
+                    setMinimumRate(jobData.payRateMin)
+                    setMaximumRate(jobData.payRateMax)
                     setNumberOfKids(jobData.numberOfKids)
                     setFullTime(jobData.fullTime)
                     setContactInformation(jobData.contactInformation)

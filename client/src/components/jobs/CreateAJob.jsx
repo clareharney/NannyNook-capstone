@@ -68,7 +68,7 @@ const CreateJob = ({ loggedInUser }) => {
           <Label className="form-label">Minimum Rate</Label>
           <Input
             type="number"
-            step="0.01"
+            step="0.25"
             value={minimumRate}
             onChange={(e) => setMinimumRate(e.target.value)}
             className="form-input"
@@ -78,7 +78,7 @@ const CreateJob = ({ loggedInUser }) => {
           <Label className="form-label">Maximum Rate</Label>
           <Input
             type="number"
-            step="0.01"
+            step="0.25"
             value={maximumRate}
             onChange={(e) => setMaximumRate(e.target.value)}
             className="form-input"

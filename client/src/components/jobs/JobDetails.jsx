@@ -71,7 +71,7 @@ const JobDetails = ({ loggedInUser }) => {
                     <CardText>{job.description}</CardText>
                     <CardText>{`Pay: ${job.payRateMin}-${job.payRateMax} an hour`}</CardText>
                     <CardText>{`Number of kids: ${job.numberOfKids}`}</CardText>
-                    <CardText>{`add full time ternary here`}</CardText>
+                    {/* <CardText>{`add full time ternary here`}</CardText> */}
                     <CardText>{`Contact ${job.contactInformation} for more information`}</CardText>
                     {/* <CardText>{`Posted By: ${job.poster.fullName}`}</CardText> */}
                     {job.posterId === loggedInUser.id ? (
