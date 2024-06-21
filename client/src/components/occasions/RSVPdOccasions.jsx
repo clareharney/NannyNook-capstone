@@ -26,7 +26,7 @@ const RSVPdOccasions = ({ loggedInUser }) => {
 
   return (
     <div className="container">
-      <h1>My Events</h1>
+      <h1>RSVP'd Events</h1>
       <div className="grid-container">
         {rsvps.map((r) => (
           <div className="grid-item" key={r.id}>

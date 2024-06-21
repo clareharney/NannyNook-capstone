@@ -146,6 +146,13 @@ const OccasionDetails = ({ loggedInUser }) => {
                         )}
                     </div>
                 </CardBody>
+                    {showConfirmation && (
+                        <div className="confirmation-modal">
+                            <p>Are you sure you want to delete this event?</p>
+                            <Button onClick={handleConfirmDelete}>Delete</Button>
+                            <Button onClick={handleCancelDelete}>Cancel</Button>
+                        </div>
+                    )}
             </Card>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalFooter>
@@ -160,13 +167,6 @@ const OccasionDetails = ({ loggedInUser }) => {
                     </Button>
                 </ModalFooter>
             </Modal>
-            {showConfirmation && (
-                <div className="confirmation-modal">
-                    <p>Are you sure you want to delete this event?</p>
-                    <Button onClick={handleConfirmDelete}>Delete</Button>
-                    <Button onClick={handleCancelDelete}>Cancel</Button>
-                </div>
-            )}
         </div>
     );
 };

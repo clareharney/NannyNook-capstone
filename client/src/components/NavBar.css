@@ -17,6 +17,7 @@ body {
   }
   
   .navbar-brand {
+    font-family: "Bungee Shade", sans-serif;
     font-size: 1.5rem;
     font-weight: bold;
     color: #FCC006;

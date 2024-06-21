@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Flamenco:wght@300;400&family=Glass+Antiqua&family=Playwrite+BR:wght@100..400&display=swap');
 
+.center-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 20px;
+}
 
 .container {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
     padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
   }
   
   h1 {
@@ -25,11 +32,15 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  .grid-item .card-body {
+  .grid-item-jobs .card-body {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 273.4px;
+    height: 259.74px;
   }
   
   .grid-item .card-title {
@@ -50,4 +61,8 @@
     font-size: 1.5rem;
     line-height: 1.6;
     color: #DA1998;
+  }
+
+  .no-jobs {
+    margin: auto;
   }
