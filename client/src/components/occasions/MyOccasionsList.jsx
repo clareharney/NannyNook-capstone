@@ -28,8 +28,9 @@ const MyOccasionsList = ({ loggedInUser }) => {
     <div className="container">
       <h1>My Events</h1>
       {occasions.length > 0 ? (
-        occasions.map((o) => (
-          <Card className="card" key={o.id}>
+      <div className="grid-container">
+          {occasions.map((o) => (
+            <Card className="card" key={o.id}>
             <CardBody className="card-body">
               <CardTitle className="card-title" tag="h5">
                 {o.title}
@@ -53,9 +54,10 @@ const MyOccasionsList = ({ loggedInUser }) => {
               </div>
             </CardBody>
           </Card>
-        ))
-      ) : (
-        <div>
+          ))}
+          </div>
+          ) : (
+              <div>
           <p className="notif">You haven't created an event yet!</p>
           <Button onClick={() => navigate("/events/create")}>
             Create an Event

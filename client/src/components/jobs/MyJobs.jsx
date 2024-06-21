@@ -28,14 +28,14 @@ const MyJobsList = ({ loggedInUser}) => {
         <div className="container">
             <h1>My Jobs</h1>
             {jobs.length > 0 ? (
-                jobs.map((j) => (
-                    <Card
-                        key={j.id}
-                        style={{
-                            width: "10rem",
-                        }}
+                <div className="grid-container">
+                {jobs.map((j) => (
+                    <div
+                    className="grid-item-jobs"
+                    key={j.id}
                     >
-                        <CardBody>
+                        <Card>
+                        <CardBody >
                             <CardTitle tag="h5">{j.title}</CardTitle>
                             <CardSubtitle className="mb-2 text-muted" tag="h6">
                                 {j.poster?.fullName}
@@ -50,10 +50,12 @@ const MyJobsList = ({ loggedInUser}) => {
                                 View Job
                             </Button>
                         </CardBody>
-                    </Card>
-                ))
+                        </Card>
+                    </div>
+                ))}
+            </div>
             ) : (
-                <div>
+                <div className="no-jobs">
                     <p className="notif">You haven't created a job posting yet!</p>
                     <Button onClick={() => navigate("/jobs/create")}>
                         Create a Job Posting

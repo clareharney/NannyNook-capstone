@@ -17,8 +17,8 @@ const AllJobs = ({ loggedInUser }) => {
       <h1>All Jobs</h1>
       <div className="grid-container">
         {jobs.map((j) => (
-          <div className="grid-item" key={j.id}>
-            <Card style={{ width: '100%' }}>
+          <div className="grid-item-jobs" key={j.id}>
+            <Card>
               <CardBody>
                 <CardTitle tag="h5">{j.title}</CardTitle>
                 <CardSubtitle className="mb-2 text-muted" tag="h6">

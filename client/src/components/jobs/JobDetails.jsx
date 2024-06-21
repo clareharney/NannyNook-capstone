@@ -18,6 +18,7 @@ import {
     Input,
 } from "reactstrap";
 import { deleteJob, getJobById } from "../../managers/jobManager.js";
+import "./AllJobs.css"
 
 const JobDetails = ({ loggedInUser }) => {
     const [job, setJob] = useState({});
@@ -56,6 +57,7 @@ const JobDetails = ({ loggedInUser }) => {
 
     return (
         <>
+        <div className="center-container">
             <Card
                 key={job.id}
                 style={{
@@ -98,6 +100,7 @@ const JobDetails = ({ loggedInUser }) => {
                     ) : ("")}
                 </CardBody>
             </Card>
+            </div>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalFooter>
                     <Button
